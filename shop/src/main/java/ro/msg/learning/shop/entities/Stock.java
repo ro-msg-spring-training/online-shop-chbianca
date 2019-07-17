@@ -2,17 +2,28 @@ package ro.msg.learning.shop.entities;
 
 
 import lombok.*;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+
+import javax.persistence.*;
 
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @EqualsAndHashCode
-@Data
+@Table
 public class Stock {
-    @Id
-    StockId Id;
-    Integer Quantity;
+    @EmbeddedId
+    StockKey Id;
+
+    @ManyToOne
+    @MapsId("Product")
+    @JoinColumn(name = "product")
+    Product product;
+
+    @ManyToOne
+    @MapsId("location")
+    @JoinColumn(name = "location")
+    Location location;
+
+    Integer quantity;
 }

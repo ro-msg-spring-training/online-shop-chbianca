@@ -2,18 +2,29 @@ package ro.msg.learning.shop.entities;
 
 
 import lombok.*;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+
+import javax.persistence.*;
 
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @EqualsAndHashCode
-@Data
+@Table
 public class OrderDetail {
 
-    @Id
-    OrderDetailId Id;
-    Integer Quantity;
+    @EmbeddedId //mark the primary key
+    OrderDetailKey id;
+
+    @ManyToOne
+    @MapsId("orderr")
+    @JoinColumn(name = "orderr")
+    Orderr orderr;
+
+    @ManyToOne
+    @MapsId("product")
+    @JoinColumn(name = "product")
+    Product product;
+
+    Integer quantity;
 }

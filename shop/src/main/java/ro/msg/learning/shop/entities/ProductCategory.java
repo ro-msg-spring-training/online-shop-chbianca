@@ -3,14 +3,15 @@ package ro.msg.learning.shop.entities;
 
 import lombok.*;
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @EqualsAndHashCode
-@Data
+@Table
 public class ProductCategory extends BaseEntity {
-    String Name;
-    String Description;
+    String name;
+    String description;
 }

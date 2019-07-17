@@ -2,10 +2,8 @@ package ro.msg.learning.shop.entities;
 
 
 import lombok.*;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
@@ -15,24 +13,21 @@ import java.util.Set;
 @AllArgsConstructor
 @Entity
 @EqualsAndHashCode
-@Data
+@Table
 public class Product extends BaseEntity {
-    String Name;
-    String Description;
-    BigDecimal Price;
-    Double Weight;
+    String name;
+    String description;
+    BigDecimal price;
+    Double weight;
     @ManyToOne
-    ProductCategory Category;
+    ProductCategory category;
     @ManyToOne
-    Supplier Supplier;
-    String ImageUrl;
+    Supplier supplier;
+    String imageUrl;
 
-    /*
-    @OneToMany(mappedBy = "Product")
+    @OneToMany(mappedBy = "product")
     Set<Stock> stoks;
 
-    @OneToMany(mappedBy = "Product")
+    @OneToMany(mappedBy = "product")
     Set<OrderDetail> orderDetails;
-
-     */
 }

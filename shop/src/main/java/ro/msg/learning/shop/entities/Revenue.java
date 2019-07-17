@@ -3,7 +3,9 @@ package ro.msg.learning.shop.entities;
 import lombok.*;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -13,10 +15,11 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Entity
 @EqualsAndHashCode
-@Data
+@Table
 public class Revenue extends BaseEntity {
     @ManyToOne
-    Location Location;
-    LocalDate Date;
-    BigDecimal Sum;
+    @JoinColumn(name = "location")
+    Location location;
+    LocalDate date;
+    BigDecimal sum;
 }

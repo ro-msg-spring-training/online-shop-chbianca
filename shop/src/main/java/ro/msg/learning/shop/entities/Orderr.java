@@ -2,9 +2,9 @@ package ro.msg.learning.shop.entities;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -12,17 +12,20 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Entity
 @EqualsAndHashCode
-@Data
+@Table
 public class Orderr extends BaseEntity{
     @ManyToOne
-    Location ShippedFrom;
+    @JoinColumn(name = "shippedFrom")
+    Location shippedFrom;
 
     @ManyToOne
-    Customer Customer;
-    LocalDateTime CreatedAt;
+    @JoinColumn(name = "customer")
+    Customer customer;
+    LocalDateTime createdAt;
 
-    String AddressCountry;
-    String AddressCity;
-    String AddressCounty;
-    String AddressStreetAddress;
+    @Embedded
+    Address address;
+
+    //@OneToMany(mappedBy = "Orderr")
+    // Set<OrderDetail> orderDetails;
 }

@@ -2,7 +2,8 @@ package ro.msg.learning.shop.entities;
 
 import lombok.*;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -10,11 +11,19 @@ import javax.persistence.Entity;
 @AllArgsConstructor
 @Entity
 @EqualsAndHashCode
-@Data
+@Table
 public class Location extends BaseEntity {
-    String Name;
-    String AddressCountry;
-    String AddressCity;
-    String AddressCounty;
-    String AddressStreetAddress;
+    String name;
+
+    @Embedded
+    Address address;
+
+    //@OneToMany(mappedBy = "Stock")
+    //Set<Stock> stoks;
+
+    // @OneToMany(mappedBy = "Location")
+    //Set<Revenue> revenues;
+
+    //@OneToMany(mappedBy = "Location")
+    // Set<Orderr> orderr;
 }
