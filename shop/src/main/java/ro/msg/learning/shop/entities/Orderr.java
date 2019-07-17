@@ -13,15 +13,17 @@ import java.util.Set;
 @Entity
 @EqualsAndHashCode
 @Table
-public class Orderr extends BaseEntity{
+public class Orderr extends BaseEntity {
     @ManyToOne
-    @JoinColumn(name = "shippedFrom")
-    Location shippedFrom;
+    @JoinColumn(name = "shipped_from ")
+    Location shipped_from;
 
     @ManyToOne
     @JoinColumn(name = "customer")
     Customer customer;
-    LocalDateTime createdAt;
+
+    @Column(name = "created_at ")
+    LocalDateTime created_at ;
 
     @Embedded
     Address address;

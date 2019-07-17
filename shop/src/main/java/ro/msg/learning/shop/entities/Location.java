@@ -13,6 +13,7 @@ import java.util.Set;
 @EqualsAndHashCode
 @Table
 public class Location extends BaseEntity {
+    @Column(name = "name")
     String name;
 
     @Embedded

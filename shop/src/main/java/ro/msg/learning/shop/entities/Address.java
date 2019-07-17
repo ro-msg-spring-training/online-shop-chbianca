@@ -23,6 +23,6 @@ public class Address implements Serializable{
     @Column(name = "county")
     String county;
 
-    @Column(name = "streetAddress")
-    String streetAddress;
+    @Column(name = "street_address")
+    String street_address;
 }

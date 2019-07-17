@@ -1,1 +1,0 @@
-MERGE INTO supplier  VALUES (1, 'test');

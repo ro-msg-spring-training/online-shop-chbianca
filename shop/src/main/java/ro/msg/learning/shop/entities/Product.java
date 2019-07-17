@@ -12,18 +12,30 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@EqualsAndHashCode
 @Table
 public class Product extends BaseEntity {
+    @Column(name = "name")
     String name;
+
+    @Column(name = "description")
     String description;
+
+    @Column(name = "price")
     BigDecimal price;
+
+    @Column(name = "weight")
     Double weight;
+
     @ManyToOne
-    ProductCategory category;
+    //@Column(name = "category_id")
+    ProductCategory category ;
+
     @ManyToOne
+    //@Column(name = "supplier_id")
     Supplier supplier;
-    String imageUrl;
+
+    @Column(name = "image_url")
+    String image_url;
 
     @OneToMany(mappedBy = "product")
     Set<Stock> stoks;

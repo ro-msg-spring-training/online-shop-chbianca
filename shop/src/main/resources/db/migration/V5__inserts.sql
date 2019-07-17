@@ -1,0 +1,1 @@
+insert INTO supplier  VALUES (2, 'test2');

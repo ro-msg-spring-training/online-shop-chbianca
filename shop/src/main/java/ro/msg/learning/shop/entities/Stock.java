@@ -9,7 +9,6 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@EqualsAndHashCode
 @Table
 public class Stock {
     @EmbeddedId
@@ -25,5 +24,6 @@ public class Stock {
     @JoinColumn(name = "location")
     Location location;
 
+    @Column(name = "quantity")
     Integer quantity;
 }
