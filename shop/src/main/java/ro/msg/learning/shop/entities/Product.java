@@ -5,7 +5,6 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.HashSet;
 import java.util.Set;
 
 @Getter @Setter
@@ -27,11 +26,9 @@ public class Product extends BaseEntity {
     Double weight;
 
     @ManyToOne
-    //@Column(name = "category_id")
     ProductCategory category ;
 
     @ManyToOne
-    //@Column(name = "supplier_id")
     Supplier supplier;
 
     @Column(name = "image_url")

@@ -1,17 +1,13 @@
 package ro.msg.learning.shop.entities;
 
 import lombok.*;
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Set;
 
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@EqualsAndHashCode
 @Table
 public class Orderr extends BaseEntity {
     @ManyToOne
@@ -27,7 +23,4 @@ public class Orderr extends BaseEntity {
 
     @Embedded
     Address address;
-
-    //@OneToMany(mappedBy = "Orderr")
-    // Set<OrderDetail> orderDetails;
 }

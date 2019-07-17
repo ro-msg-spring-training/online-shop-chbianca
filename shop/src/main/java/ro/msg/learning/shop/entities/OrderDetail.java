@@ -2,14 +2,12 @@ package ro.msg.learning.shop.entities;
 
 
 import lombok.*;
-
 import javax.persistence.*;
 
-@Getter @Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@EqualsAndHashCode
 @Table
 public class OrderDetail {
 

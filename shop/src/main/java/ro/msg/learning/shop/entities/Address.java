@@ -1,16 +1,11 @@
 package ro.msg.learning.shop.entities;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-
+import lombok.Data;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
-
 import java.io.Serializable;
-@EqualsAndHashCode
-@Getter
-@Setter
+
+@Data
 @Embeddable
 public class Address implements Serializable{
 
