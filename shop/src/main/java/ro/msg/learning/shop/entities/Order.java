@@ -5,11 +5,10 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
-@Table
-public class Orderr extends BaseEntity {
+@Table(name ="orderr")
+public class Order extends BaseEntity {
+
     @ManyToOne
     @JoinColumn(name = "shipped_from ")
     private Location shippedFrom;

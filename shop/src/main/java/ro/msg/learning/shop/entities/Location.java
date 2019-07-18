@@ -4,8 +4,6 @@ import lombok.*;
 import javax.persistence.*;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table
 public class Location extends BaseEntity {

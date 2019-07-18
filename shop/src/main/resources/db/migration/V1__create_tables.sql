@@ -1,26 +1,25 @@
-drop table customer if exists;
+drop table if exists customer;
 
-drop table location if exists;
+drop table if exists location;
 
-drop table order_detail if exists;
+drop table if exists order_detail;
 
-drop table orderr if exists;
+drop table if exists orderr;
 
-drop table product if exists;
+drop table if exists product;
 
-drop table product_category if exists;
+drop table if exists product_category;
 
-drop table revenue if exists;
+drop table if exists revenue;
 
-drop table stock if exists;
+drop table if exists stock;
 
-drop table supplier if exists;
+drop table if exists supplier;
 
 drop sequence if exists hibernate_sequence;
-create sequence hibernate_sequence start with 1 increment by 1;
 
 create table customer (
-   id integer not null,
+   id integer not null AUTO_INCREMENT,
     first_name varchar(255),
     last_name varchar(255),
     username varchar(255),
@@ -31,7 +30,7 @@ email_address varchar(255),
 
 
 create table location (
-   id integer not null,
+   id integer not null AUTO_INCREMENT,
 name varchar(255),
 country varchar(255),
     city varchar(255),
@@ -50,7 +49,7 @@ create table order_detail (
 
 
 create table orderr (
-   id integer not null,
+   id integer not null AUTO_INCREMENT,
 shipped_from integer,
 customer integer,
 created_at timestamp,
@@ -63,7 +62,7 @@ created_at timestamp,
 
 
 create table product (
-   id integer not null,
+   id integer not null AUTO_INCREMENT,
 
     name varchar(255),
     description varchar(255),
@@ -77,7 +76,7 @@ image_url varchar(255),
 );
 
 create table product_category (
-   id integer not null,
+   id integer not null AUTO_INCREMENT,
 
     name varchar(255),
 description varchar(255),
@@ -86,7 +85,7 @@ description varchar(255),
 
 
 create table revenue (
-   id integer not null,
+   id integer not null AUTO_INCREMENT,
 location integer,
     date date,
     sum decimal(19,2),
@@ -104,7 +103,7 @@ create table stock (
 
 
 create table supplier (
-   id integer not null,
+   id integer not null AUTO_INCREMENT,
     name varchar(255),
     primary key (id)
 );

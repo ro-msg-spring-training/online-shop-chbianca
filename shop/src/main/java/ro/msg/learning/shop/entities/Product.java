@@ -8,8 +8,6 @@ import java.math.BigDecimal;
 import java.util.Set;
 
 @Getter @Setter
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table
 public class Product extends BaseEntity {

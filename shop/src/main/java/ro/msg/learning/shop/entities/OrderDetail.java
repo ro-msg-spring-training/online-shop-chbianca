@@ -5,8 +5,6 @@ import lombok.*;
 import javax.persistence.*;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table
 public class OrderDetail {
@@ -15,9 +13,9 @@ public class OrderDetail {
     private OrderDetailKey id;
 
     @ManyToOne
-    @MapsId("orderr")
+    @MapsId("order")
     @JoinColumn(name = "orderr")
-    private Orderr orderr;
+    private Order order;
 
     @ManyToOne
     @MapsId("product")
