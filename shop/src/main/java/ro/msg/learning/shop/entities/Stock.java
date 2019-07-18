@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Table
 public class Stock {
     @EmbeddedId
-    StockKey Id;
+    private StockKey Id;
 
     @ManyToOne
     @MapsId("Product")
