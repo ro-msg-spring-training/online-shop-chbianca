@@ -6,15 +6,15 @@ import ro.msg.learning.shop.repositories.*;
 
 @RestController
 public class TestController {
-        SupplierRepository sr;
-        ProductRepository pr;
-        CustomerRepository cr;
-        LocationRepository lr;
-        OrderrRepository or;
-        OrderDetailRepository odr;
-        ProductCategoryRepository pcr;
-        RevenueRepository rr;
-        StockRepository srr;
+        private SupplierRepository sr;
+        private ProductRepository pr;
+        private CustomerRepository cr;
+        private LocationRepository lr;
+        private OrderrRepository or;
+        private OrderDetailRepository odr;
+        private ProductCategoryRepository pcr;
+        private RevenueRepository rr;
+        private StockRepository srr;
 
 
         public TestController(SupplierRepository sr, ProductRepository pr, CustomerRepository cr, LocationRepository lr, OrderrRepository or, OrderDetailRepository odr, ProductCategoryRepository pcr, RevenueRepository rr, StockRepository srr){
