@@ -13,11 +13,11 @@ import java.time.LocalDate;
 public class Revenue extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "location")
-    Location location;
+    private Location location;
 
     @Column(name = "date")
-    LocalDate date;
+    private LocalDate date;
 
     @Column(name = "sum")
-    BigDecimal sum;
+    private BigDecimal sum;
 }

@@ -12,17 +12,17 @@ import javax.persistence.*;
 public class OrderDetail {
 
     @EmbeddedId //mark the primary key
-    OrderDetailKey id;
+    private OrderDetailKey id;
 
     @ManyToOne
     @MapsId("orderr")
     @JoinColumn(name = "orderr")
-    Orderr orderr;
+    private Orderr orderr;
 
     @ManyToOne
     @MapsId("product")
     @JoinColumn(name = "product")
-    Product product;
+    private Product product;
 
-    Integer quantity;
+    private Integer quantity;
 }

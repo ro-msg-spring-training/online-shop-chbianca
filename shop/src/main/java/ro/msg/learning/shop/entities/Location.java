@@ -10,9 +10,9 @@ import javax.persistence.*;
 @Table
 public class Location extends BaseEntity {
     @Column(name = "name")
-    String name;
+    private String name;
 
     @Embedded
-    Address address;
+    private Address address;
 
 }

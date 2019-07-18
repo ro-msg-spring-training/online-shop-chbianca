@@ -9,8 +9,8 @@ import java.io.Serializable;
 @Embeddable
 public class OrderDetailKey implements Serializable {
     @Column(name = "orderr")
-    Integer order;
+    private Integer order;
 
     @Column(name = "product")
-    Integer product;
+    private Integer product;
 }

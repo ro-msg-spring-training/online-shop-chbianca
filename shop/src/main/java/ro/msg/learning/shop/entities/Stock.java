@@ -17,13 +17,13 @@ public class Stock {
     @ManyToOne
     @MapsId("Product")
     @JoinColumn(name = "product")
-    Product product;
+    private Product product;
 
     @ManyToOne
     @MapsId("location")
     @JoinColumn(name = "location")
-    Location location;
+    private Location location;
 
     @Column(name = "quantity")
-    Integer quantity;
+    private Integer quantity;
 }

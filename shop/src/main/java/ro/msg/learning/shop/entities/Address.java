@@ -10,14 +10,14 @@ import java.io.Serializable;
 public class Address implements Serializable{
 
     @Column(name = "country")
-    String country;
+    private String country;
 
     @Column(name = "city")
-    String city;
+    private String city;
 
     @Column(name = "county")
-    String county;
+    private String county;
 
     @Column(name = "street_address")
-    String street_address;
+    private String streetAddress;
 }

@@ -13,5 +13,5 @@ import javax.persistence.Table;
 public class Supplier extends BaseEntity {
 
     @Column(name = "name")
-    String name;
+    private String name;
 }

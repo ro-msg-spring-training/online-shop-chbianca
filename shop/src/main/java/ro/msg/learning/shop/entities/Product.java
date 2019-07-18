@@ -14,29 +14,29 @@ import java.util.Set;
 @Table
 public class Product extends BaseEntity {
     @Column(name = "name")
-    String name;
+    private String name;
 
     @Column(name = "description")
-    String description;
+    private String description;
 
     @Column(name = "price")
-    BigDecimal price;
+    private BigDecimal price;
 
     @Column(name = "weight")
-    Double weight;
+    private Double weight;
 
     @ManyToOne
-    ProductCategory category ;
+    private ProductCategory category ;
 
     @ManyToOne
-    Supplier supplier;
+    private Supplier supplier;
 
     @Column(name = "image_url")
-    String image_url;
+    private String imageUrl;
 
     @OneToMany(mappedBy = "product")
-    Set<Stock> stoks;
+    private Set<Stock> stoks;
 
     @OneToMany(mappedBy = "product")
-    Set<OrderDetail> orderDetails;
+    private Set<OrderDetail> orderDetails;
 }

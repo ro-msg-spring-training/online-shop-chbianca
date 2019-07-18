@@ -12,15 +12,15 @@ import java.time.LocalDateTime;
 public class Orderr extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "shipped_from ")
-    Location shipped_from;
+    private Location shippedFrom;
 
     @ManyToOne
     @JoinColumn(name = "customer")
-    Customer customer;
+    private Customer customer;
 
     @Column(name = "created_at ")
-    LocalDateTime created_at ;
+    private LocalDateTime createdAt ;
 
     @Embedded
-    Address address;
+    private Address address;
 }

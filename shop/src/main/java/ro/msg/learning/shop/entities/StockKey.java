@@ -9,9 +9,9 @@ import java.io.Serializable;
 @Embeddable
 public class StockKey implements Serializable {
     @Column(name = "product")
-    Integer product;
+    private Integer product;
 
     @Column(name = "location")
-    Integer location;
+    private Integer location;
 }
 

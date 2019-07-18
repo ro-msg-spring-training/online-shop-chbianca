@@ -13,17 +13,17 @@ import javax.persistence.Table;
 @Table
 public class Customer extends BaseEntity {
     @Column(name = "first_name")
-    String first_name;
+    private String firstName;
 
     @Column(name = "last_name")
-    String last_name;
+    private String lastName;
 
     @Column(name = "username")
-    String username;
+    private String username;
 
     @Column(name = "password")
-    String password;
+    private String password;
 
     @Column(name = "email_address")
-    String email_address ;
+    private String emailAddress ;
 }

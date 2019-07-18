@@ -13,8 +13,8 @@ import javax.persistence.Table;
 @Table
 public class ProductCategory extends BaseEntity {
     @Column(name = "name")
-    String name;
+    private String name;
 
     @Column(name = "description")
-    String description;
+    private String description;
 }
