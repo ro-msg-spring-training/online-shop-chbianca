@@ -9,4 +9,6 @@ public class SimpleOrder {
     private LocalDateTime timestamp;
     private Address deliveryAddress;
     private List<SimpleProduct> products;
+
+
 }

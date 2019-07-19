@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Getter @Setter
 @Entity
 @Table
-public class Stock {
+public class Stock implements Comparable<Stock> {
     @EmbeddedId
     private StockKey Id;
 
@@ -24,4 +24,11 @@ public class Stock {
 
     @Column(name = "quantity")
     private Integer quantity;
+
+    @Override
+    public int compareTo(Stock stockToCompare) {
+        int compareQuantity=((Stock)stockToCompare).getQuantity();
+        return compareQuantity-this.quantity;
+    }
+
 }
