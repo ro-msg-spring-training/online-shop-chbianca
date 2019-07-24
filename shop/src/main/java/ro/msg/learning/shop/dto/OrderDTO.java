@@ -14,9 +14,6 @@ public class OrderDTO {
     private LocalDateTime createdAt;
     private Address address;
 
-    public OrderDTO() {
-    }
-
     public OrderDTO(Integer id, Location shippedFrom, Customer customer, LocalDateTime createdAt, Address address) {
         super();
         this.id = id;

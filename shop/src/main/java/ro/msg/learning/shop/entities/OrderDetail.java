@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Table
 public class OrderDetail {
 
-    @EmbeddedId //mark the primary key
+    @EmbeddedId
     private OrderDetailKey id;
 
     @ManyToOne

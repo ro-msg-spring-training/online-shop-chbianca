@@ -10,9 +10,6 @@ public class SimpleProductDTO {
     private Integer id;
     private Integer quantity;
 
-    public SimpleProductDTO() {
-    }
-
     public SimpleProductDTO(Integer id, Integer quantity) {
         super();
         this.id = id;

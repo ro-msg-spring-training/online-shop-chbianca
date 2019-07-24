@@ -14,9 +14,6 @@ public class SimpleOrderDTO {
     private Address deliveryAddress;
     private List<SimpleProduct> products;
 
-    public SimpleOrderDTO() {
-    }
-
     public SimpleOrderDTO( LocalDateTime timestamp, Address deliveryAddress, List<SimpleProduct> products) {
         super();
         this.timestamp = timestamp;

@@ -44,13 +44,11 @@ public class ProductService {
 
     public Integer delete(Integer id) {
         productRepository.deleteById(id);
-        //System.out.println("DELETE: " + id);
         return id;
     }
 
     public Integer update(Integer id, ProductDTO productDTO) {
         productRepository.deleteById(id);
-        //System.out.println("UPDATE: " + id);
         return create(productDTO);
     }
 

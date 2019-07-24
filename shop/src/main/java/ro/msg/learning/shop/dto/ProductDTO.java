@@ -19,8 +19,6 @@ public class ProductDTO {
     private Supplier supplier;
     private String imageUrl;
 
-    public ProductDTO() {
-    }
 
     public ProductDTO(Integer id, String name, String description, BigDecimal price, Double weight,  ProductCategory category, Supplier supplier, String imageUrl) {
         super();

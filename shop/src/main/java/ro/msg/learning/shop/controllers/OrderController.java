@@ -4,11 +4,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import ro.msg.learning.shop.dto.OrderDTO;
 import ro.msg.learning.shop.dto.SimpleOrderDTO;
+import ro.msg.learning.shop.entities.Order;
 import ro.msg.learning.shop.services.OrderService;
 
 @RestController
-@RequestMapping("/simpleOrder")
+@RequestMapping("/order")
 public class OrderController {
     private OrderService orderService;
 
@@ -16,8 +18,8 @@ public class OrderController {
         this.orderService = orderService;
     }
 
-    @RequestMapping(value = "/insert", method = RequestMethod.POST)
-    public int insertSimpleOrder(@RequestBody SimpleOrderDTO simpleOrderDTO) {
-        return orderService.methodGetOrder(simpleOrderDTO).getId();
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    public Order createOrder(@RequestBody SimpleOrderDTO simpleOrderDTO) {
+        return orderService.methodGetOrder(simpleOrderDTO);
     }
 }
