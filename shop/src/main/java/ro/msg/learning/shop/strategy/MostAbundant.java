@@ -5,7 +5,6 @@ import ro.msg.learning.shop.entities.Item;
 import ro.msg.learning.shop.entities.Location;
 import ro.msg.learning.shop.entities.SimpleProduct;
 import ro.msg.learning.shop.entities.Stock;
-import ro.msg.learning.shop.repositories.LocationRepository;
 import ro.msg.learning.shop.repositories.ProductRepository;
 import ro.msg.learning.shop.repositories.StockRepository;
 
@@ -55,7 +54,7 @@ public class MostAbundant implements Strategy{
         }
         catch(Exception e)
         {
-            System.out.println("Nu exista pe stoc 0!");
+            System.out.println("Nu exista pe stoc (Most Abundant)!");
         }
         return location;
     }

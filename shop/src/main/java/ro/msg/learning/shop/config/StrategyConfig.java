@@ -29,7 +29,7 @@ public class StrategyConfig {
 
     @Bean
     public Strategy strategy(){
-        if(strategy.equals("singleLocation")){
+        if("singleLocation".equals(strategy)){
             return new SingleLocation(stockRepository, locationRepository, productRepository);
         }
         else return new MostAbundant(stockRepository, productRepository);

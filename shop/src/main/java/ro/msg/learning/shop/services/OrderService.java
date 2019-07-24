@@ -1,6 +1,7 @@
 package ro.msg.learning.shop.services;
 
 import org.springframework.stereotype.Service;
+import ro.msg.learning.shop.dto.OrderDTO;
 import ro.msg.learning.shop.dto.SimpleOrderDTO;
 import ro.msg.learning.shop.entities.*;
 import ro.msg.learning.shop.repositories.OrderDetailRepository;
@@ -30,7 +31,7 @@ public class OrderService {
         this.strategy = strategy;
     }
 
-    public Order methodGetOrder(SimpleOrderDTO simpleOrderDTO) {
+    public OrderDTO methodGetOrder(SimpleOrderDTO simpleOrderDTO) {
         Order order = new Order();
         order.setCreatedAt(simpleOrderDTO.getTimestamp());
         order.setAddress(simpleOrderDTO.getDeliveryAddress());
@@ -60,7 +61,7 @@ public class OrderService {
         {
             System.out.println("Nu exista pe stoc!");
         }
-        return order;
+        return orderToOrderDTO(order);
     }
 
     public void updateStocks(SimpleOrderDTO simpleOrderDTO) {
@@ -79,6 +80,10 @@ public class OrderService {
             stock.setProduct(item.getProduct());
             stockRepository.save(stock);
         }
+    }
+
+    public OrderDTO orderToOrderDTO(Order order){
+        return OrderDTO.orderToDTO(order);
     }
 
 }

@@ -23,7 +23,7 @@ public class OrderDTO {
         this.address = address;
     }
 
-    public static OrderDTO OrderToDTO (Order order){
+    public static OrderDTO orderToDTO (Order order){
         OrderDTO orderDto = new OrderDTO.OrderBuilder()
                 .with($ -> {
                     $.nestedId = order.getId();

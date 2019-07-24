@@ -54,10 +54,11 @@ public class SingleLocation implements Strategy{
                     item.setQuantity(simpleProduct.getQuantity());
                     items.add(item);
                 }
+                break;
             }
             else
             {System.out.println("Nu exista pe stoc toate produsele in aceeasi locatie!");}
-            break;
+
 
         }
         return items;

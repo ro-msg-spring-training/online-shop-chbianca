@@ -21,22 +21,22 @@ public class SimpleOrderDTO {
         this.products = products;
     }
 
-    public static SimpleOrderDTO SimpleOrderToDTO (SimpleOrder SimpleOrder){
-        SimpleOrderDTO SimpleOrderDto = new SimpleOrderDTO.SimpleOrderBuilder()
+    public static SimpleOrderDTO simpleOrderToDTO (SimpleOrder simpleOrder){
+        SimpleOrderDTO simpleOrderDTO = new SimpleOrderDTO.SimpleOrderBuilder()
                 .with($ -> {
-                    $.nestedTimestamp = SimpleOrder.getTimestamp();
-                    $.nestedDeliveryAddress = SimpleOrder.getDeliveryAddress();
-                    $.nestedProducts = SimpleOrder.getProducts();
+                    $.nestedTimestamp = simpleOrder.getTimestamp();
+                    $.nestedDeliveryAddress = simpleOrder.getDeliveryAddress();
+                    $.nestedProducts = simpleOrder.getProducts();
                 })
                 .createSimpleOrder();
-        return SimpleOrderDto;
+        return simpleOrderDTO;
     }
 
-    public static SimpleOrder dtoToSimpleOrder (SimpleOrderDTO SimpleOrderDTO) {
-        SimpleOrder SimpleOrder = new SimpleOrder();
-        SimpleOrder.setTimestamp(SimpleOrderDTO.getTimestamp());
-        SimpleOrder.setDeliveryAddress(SimpleOrderDTO.getDeliveryAddress());
-        return SimpleOrder;
+    public static SimpleOrder dtoToSimpleOrder (SimpleOrderDTO simpleOrderDTO) {
+        SimpleOrder simpleOrder = new SimpleOrder();
+        simpleOrder.setTimestamp(simpleOrderDTO.getTimestamp());
+        simpleOrder.setDeliveryAddress(simpleOrderDTO.getDeliveryAddress());
+        return simpleOrder;
     }
 
     public static class SimpleOrderBuilder {

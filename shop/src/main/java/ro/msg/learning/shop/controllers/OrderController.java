@@ -4,8 +4,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import ro.msg.learning.shop.dto.OrderDTO;
 import ro.msg.learning.shop.dto.SimpleOrderDTO;
-import ro.msg.learning.shop.entities.Order;
 import ro.msg.learning.shop.services.OrderService;
 
 @RestController
@@ -18,7 +18,7 @@ public class OrderController {
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public Order createOrder(@RequestBody SimpleOrderDTO simpleOrderDTO) {
+    public OrderDTO createOrder(@RequestBody SimpleOrderDTO simpleOrderDTO) {
         return orderService.methodGetOrder(simpleOrderDTO);
     }
 }
