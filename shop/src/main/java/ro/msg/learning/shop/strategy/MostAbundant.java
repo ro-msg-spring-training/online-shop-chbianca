@@ -18,12 +18,10 @@ import java.util.List;
 public class MostAbundant implements Strategy{
 
     private StockRepository stockRepository;
-    private LocationRepository locationRepository;
     private ProductRepository productRepository;
 
-    public MostAbundant(StockRepository stockRepository, LocationRepository locationRepository, ProductRepository productRepository){
+    public MostAbundant(StockRepository stockRepository, ProductRepository productRepository){
         this.stockRepository = stockRepository;
-        this.locationRepository = locationRepository;
         this.productRepository = productRepository;
     }
 

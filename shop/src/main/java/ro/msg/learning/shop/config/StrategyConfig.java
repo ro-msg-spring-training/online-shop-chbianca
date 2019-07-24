@@ -32,7 +32,7 @@ public class StrategyConfig {
         if(strategy.equals("singleLocation")){
             return new SingleLocation(stockRepository, locationRepository, productRepository);
         }
-        else return new MostAbundant(stockRepository, locationRepository, productRepository);
+        else return new MostAbundant(stockRepository, productRepository);
     }
 }
 

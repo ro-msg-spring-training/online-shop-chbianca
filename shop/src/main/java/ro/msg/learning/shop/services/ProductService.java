@@ -11,7 +11,7 @@ import java.util.List;
 @Service
 public class ProductService {
 
-    ProductRepository productRepository;
+    private ProductRepository productRepository;
 
     public ProductService(ProductRepository productRepository) {
         this.productRepository = productRepository;
@@ -51,7 +51,5 @@ public class ProductService {
         productRepository.deleteById(id);
         return create(productDTO);
     }
-
-
 
 }

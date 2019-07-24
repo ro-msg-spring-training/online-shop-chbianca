@@ -23,27 +23,27 @@ public class OrderDTO {
         this.address = address;
     }
 
-    public static OrderDTO OrderToDTO (Order Order){
-        OrderDTO OrderDto = new OrderDTO.OrderBuilder()
+    public static OrderDTO OrderToDTO (Order order){
+        OrderDTO orderDto = new OrderDTO.OrderBuilder()
                 .with($ -> {
-                    $.nestedId = Order.getId();
-                    $.nestedSShippedFrom = Order.getShippedFrom();
-                    $.nestedCustomer = Order.getCustomer();
-                    $.nestedCreatedAt = Order.getCreatedAt();
-                    $.nestedAddress = Order.getAddress();
+                    $.nestedId = order.getId();
+                    $.nestedSShippedFrom = order.getShippedFrom();
+                    $.nestedCustomer = order.getCustomer();
+                    $.nestedCreatedAt = order.getCreatedAt();
+                    $.nestedAddress = order.getAddress();
                 })
                 .createOrder();
-        return OrderDto;
+        return orderDto;
     }
 
-    public static Order dtoToOrder (OrderDTO OrderDTO) {
-        Order Order = new Order();
-        Order.setId(OrderDTO.getId());
-        Order.setShippedFrom(OrderDTO.getShippedFrom());
-        Order.setCustomer(OrderDTO.getCustomer());
-        Order.setCreatedAt(OrderDTO.getCreatedAt());
-        Order.setAddress(OrderDTO.getAddress());
-        return Order;
+    public static Order dtoToOrder (OrderDTO orderDTO) {
+        Order order = new Order();
+        order.setId(orderDTO.getId());
+        order.setShippedFrom(orderDTO.getShippedFrom());
+        order.setCustomer(orderDTO.getCustomer());
+        order.setCreatedAt(orderDTO.getCreatedAt());
+        order.setAddress(orderDTO.getAddress());
+        return order;
     }
 
     public static class OrderBuilder {
