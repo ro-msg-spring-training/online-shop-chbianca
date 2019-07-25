@@ -102,8 +102,7 @@ create table stock (
 );
 
 
-create table supplier (
-                          id integer not null AUTO_INCREMENT,
+create table supplier (id integer not null AUTO_INCREMENT,
                           name varchar(255),
                           primary key (id)
 );

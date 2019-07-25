@@ -7,19 +7,19 @@ import java.util.function.Consumer;
 @Data
 public class SimpleProductDTO {
 
-    private Integer id;
+    private Integer productId;
     private Integer quantity;
 
-    public SimpleProductDTO(Integer id, Integer quantity) {
+    public SimpleProductDTO(Integer productId, Integer quantity) {
         super();
-        this.id = id;
+        this.productId = productId;
         this.quantity = quantity;
     }
 
     public static SimpleProductDTO simpleProductToDTO (SimpleProduct simpleProduct){
         SimpleProductDTO simpleProductDto = new SimpleProductDTO.SimpleProductBuilder()
                 .with($ -> {
-                    $.nestedId = simpleProduct.getId();
+                    $.nestedProductId = simpleProduct.getProductId();
                     $.nestedQuantity = simpleProduct.getQuantity();
                 })
                 .createSimpleProduct();
@@ -28,13 +28,13 @@ public class SimpleProductDTO {
 
     public static SimpleProduct dtoToProduct (SimpleProductDTO simpleProductDTO) {
         SimpleProduct simpleProduct = new SimpleProduct();
-        simpleProduct.setId(simpleProductDTO.getId());
+        simpleProduct.setProductId(simpleProductDTO.getProductId());
         simpleProduct.setQuantity(simpleProductDTO.getQuantity());
         return simpleProduct;
     }
 
     public static class SimpleProductBuilder {
-        public Integer nestedId;
+        public Integer nestedProductId;
         public Integer nestedQuantity;
 
         public SimpleProductBuilder with(
@@ -44,7 +44,7 @@ public class SimpleProductDTO {
         }
 
         public SimpleProductDTO createSimpleProduct() {
-            return new SimpleProductDTO(nestedId, nestedQuantity);
+            return new SimpleProductDTO(nestedProductId, nestedQuantity);
         }
     }
 

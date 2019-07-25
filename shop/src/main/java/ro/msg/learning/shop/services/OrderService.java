@@ -42,16 +42,16 @@ public class OrderService {
         orderDetailKey.setOrder(order.getId());
         orderRepository.save(order);
         try {
-        simpleProducts.forEach(product -> {
-                orderDetailKey.setProduct(productRepository.findById(product.getId()).get().getId());
-                odk.setProduct(product.getId());
+            simpleProducts.forEach(simpleProduct -> {
+                orderDetailKey.setProduct(productRepository.findById(simpleProduct.getProductId()).get().getId());
+                odk.setProduct(simpleProduct.getProductId());
                 odk.setOrder(order.getId());
                 od.setId(orderDetailKey);
-                od.setQuantity(product.getQuantity());
+                od.setQuantity(simpleProduct.getQuantity());
                 od.setOrder(orderRepository.findById(order.getId()).get());
-                od.setProduct(productRepository.findById(product.getId()).get());
-            orderDetailRepository.save(od);
-        });
+                od.setProduct(productRepository.findById(simpleProduct.getProductId()).get());
+                orderDetailRepository.save(od);
+            });
             updateStocks(simpleOrderDTO);
         }
         catch (NoSuchElementException e) {
@@ -61,7 +61,7 @@ public class OrderService {
         {
             System.out.println("Nu exista pe stoc!");
         }
-        return orderToOrderDTO(order);
+        return OrderDTO.orderToDTO(order);
     }
 
     public void updateStocks(SimpleOrderDTO simpleOrderDTO) {
@@ -81,9 +81,4 @@ public class OrderService {
             stockRepository.save(stock);
         }
     }
-
-    public OrderDTO orderToOrderDTO(Order order){
-        return OrderDTO.orderToDTO(order);
-    }
-
 }

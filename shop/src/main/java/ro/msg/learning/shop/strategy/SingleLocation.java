@@ -34,7 +34,7 @@ public class SingleLocation implements Strategy{
             boolean b = true;
             for (SimpleProduct simpleProduct : simpleProducts) {
                 ProductLocation productLocation = new ProductLocation();
-                productLocation.setProduct(productRepository.findById(simpleProduct.getId()).get());
+                productLocation.setProduct(productRepository.findById(simpleProduct.getProductId()).get());
                 productLocation.setLocations(verifyLocationsForProduct(simpleProduct));
                 productLocations.add(productLocation);
             }
@@ -50,17 +50,18 @@ public class SingleLocation implements Strategy{
                 for (SimpleProduct simpleProduct : simpleProducts) {
                     Item item = new Item();
                     item.setLocation(location);
-                    item.setProduct(productRepository.findById(simpleProduct.getId()).get());
+                    item.setProduct(productRepository.findById(simpleProduct.getProductId()).get());
                     item.setQuantity(simpleProduct.getQuantity());
                     items.add(item);
                 }
-                break;
+               break;
             }
             else
             {System.out.println("Nu exista pe stoc toate produsele in aceeasi locatie!");}
 
 
         }
+        //System.out.println("items: " + items.get(0).getLocation());
         return items;
     }
 
@@ -69,7 +70,7 @@ public class SingleLocation implements Strategy{
         List<Stock> stocks = stockRepository.findAll();
         List<Location> locations = new ArrayList<>();
         for (Stock stock : stocks) {
-            if ((simpleProduct.getId().equals(stock.getProduct().getId())) && (simpleProduct.getQuantity() <= stock.getQuantity())) {
+            if ((simpleProduct.getProductId().equals(stock.getProduct().getId())) && (simpleProduct.getQuantity() <= stock.getQuantity())) {
                 locations.add(stock.getLocation());
             }
         }

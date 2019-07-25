@@ -32,7 +32,7 @@ public class MostAbundant implements Strategy{
             finalLocations.add(verifyLocationsWithMaxStockForProduct(simpleProduct));
             Item item = new Item();
             item.setLocation(verifyLocationsWithMaxStockForProduct(simpleProduct));
-            item.setProduct(productRepository.findById(simpleProduct.getId()).get());
+            item.setProduct(productRepository.findById(simpleProduct.getProductId()).get());
             item.setQuantity(simpleProduct.getQuantity());
             items.add(item);
         }
@@ -43,7 +43,7 @@ public class MostAbundant implements Strategy{
         List<Stock> stocks = stockRepository.findAll();
         List<Stock> finalStocks = new ArrayList<>();
         for (Stock stock : stocks) {
-            if ((simpleProduct.getId().equals(stock.getProduct().getId())) && (simpleProduct.getQuantity() <= stock.getQuantity())) {
+            if ((simpleProduct.getProductId().equals(stock.getProduct().getId())) && (simpleProduct.getQuantity() <= stock.getQuantity())) {
                 finalStocks.add(stock);
             }
         }
