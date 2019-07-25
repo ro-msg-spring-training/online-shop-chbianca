@@ -1,13 +1,11 @@
 package ro.msg.learning.shop.unit_testing;
 
+import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 import ro.msg.learning.shop.entities.*;
 import ro.msg.learning.shop.repositories.ProductRepository;
 import ro.msg.learning.shop.repositories.StockRepository;
@@ -21,8 +19,7 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
-@ExtendWith(MockitoExtension.class)
-//@RunWith(JUnitPlatform.class)
+@RunWith(MockitoJUnitRunner.class)
 public class MostAbundantTest {
     @Mock
     private StockRepository stockRepository;
@@ -33,7 +30,7 @@ public class MostAbundantTest {
     @InjectMocks
     private MostAbundant mostAbundant;
 
-    @BeforeEach
+    @Before
     public void initMostAbundant() {
         mostAbundant = new MostAbundant(stockRepository, productRepository );
         ProductCategory pc1 = new ProductCategory();
@@ -159,7 +156,7 @@ public class MostAbundantTest {
         i2.setQuantity(3);
 
         when(productRepository.findById(1)).thenReturn(Optional.of(p1));
-        //when(productRepository.findById(2)).thenReturn(Optional.of(p2));
+        when(productRepository.findById(2)).thenReturn(Optional.of(p2));
         when(stockRepository.findAll()).thenReturn(stocks);
     }
 
