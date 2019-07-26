@@ -85,7 +85,7 @@ public class OrderService {
         Boolean b = true;
         for (SimpleProduct simpleProduct : simpleProducts) {
             try {
-                Product product = productRepository.findById(simpleProduct.getProductId()).get();
+                 productRepository.findById(simpleProduct.getProductId()).get();
             } catch (NoSuchElementException e) {
                 b = false;
                 System.out.println(e.getMessage());
