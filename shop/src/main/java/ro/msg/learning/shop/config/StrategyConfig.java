@@ -14,7 +14,6 @@ import ro.msg.learning.shop.strategy.Strategy;
 
 
 @Configuration
-@PropertySource("application.properties")
 public class StrategyConfig {
     @Value("${strategyValue}")
     private String strategy;

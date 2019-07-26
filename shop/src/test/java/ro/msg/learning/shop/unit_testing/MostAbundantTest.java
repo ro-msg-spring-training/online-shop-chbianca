@@ -114,18 +114,14 @@ public class MostAbundantTest {
         Stock st1 = new Stock();
         st1.setId(sk1);
         st1.setQuantity(4);
+        st1.setProduct(p1);
+        st1.setLocation(l1);
 
         Stock st2 = new Stock();
         st2.setId(sk2);
         st2.setQuantity(6);
-
-        Stock st3 = new Stock();
-        st1.setId(sk3);
-        st1.setQuantity(8);
-
-        Stock st4 = new Stock();
-        st2.setId(sk4);
-        st2.setQuantity(12);
+        st2.setProduct(p2);
+        st2.setLocation(l2);
 
         List<Location> locations = new ArrayList<>();
         locations.add(l1);
@@ -134,8 +130,6 @@ public class MostAbundantTest {
         List<Stock> stocks = new ArrayList<>();
         stocks.add(st1);
         stocks.add(st2);
-        stocks.add(st3);
-        stocks.add(st4);
 
         SimpleProduct sp1 = new SimpleProduct();
         sp1.setProductId(1);
@@ -174,9 +168,8 @@ public class MostAbundantTest {
         simpleProducts.add(sp2);
 
         List<Item> items = mostAbundant.findLocations(simpleProducts);
-        assertThat(items.get(0)).isNotNull();
+        assertThat(items.get(1)).isNotNull();
     }
-
 }
 
 

@@ -23,7 +23,7 @@ public class OrderService {
     private StockRepository stockRepository;
     private Strategy strategy;
 
-    public OrderService(OrderRepository orderRepository, OrderDetailRepository orderDetailRepository, ProductRepository productRepository,StockRepository stockRepository, Strategy strategy) {
+    public OrderService(OrderRepository orderRepository, OrderDetailRepository orderDetailRepository, ProductRepository productRepository, StockRepository stockRepository, Strategy strategy) {
         this.orderRepository = orderRepository;
         this.orderDetailRepository = orderDetailRepository;
         this.productRepository = productRepository;
@@ -40,26 +40,25 @@ public class OrderService {
         OrderDetail od = new OrderDetail();
         OrderDetailKey orderDetailKey = new OrderDetailKey();
         orderDetailKey.setOrder(order.getId());
-        orderRepository.save(order);
-        try {
-            simpleProducts.forEach(simpleProduct -> {
-                orderDetailKey.setProduct(productRepository.findById(simpleProduct.getProductId()).get().getId());
-                odk.setProduct(simpleProduct.getProductId());
-                odk.setOrder(order.getId());
-                od.setId(orderDetailKey);
-                od.setQuantity(simpleProduct.getQuantity());
-                od.setOrder(orderRepository.findById(order.getId()).get());
-                od.setProduct(productRepository.findById(simpleProduct.getProductId()).get());
-                orderDetailRepository.save(od);
-            });
-            updateStocks(simpleOrderDTO);
-        }
-        catch (NoSuchElementException e) {
-            System.out.println("Produs inexistent!");
-        }
-        catch(Exception e)
-        {
-            System.out.println("Nu exista pe stoc!");
+        if (checkProducts(simpleProducts)) {
+            orderRepository.save(order);
+            try {
+                simpleProducts.forEach(simpleProduct -> {
+                    orderDetailKey.setProduct(productRepository.findById(simpleProduct.getProductId()).get().getId());
+                    odk.setProduct(simpleProduct.getProductId());
+                    odk.setOrder(order.getId());
+                    od.setId(orderDetailKey);
+                    od.setQuantity(simpleProduct.getQuantity());
+                    od.setOrder(orderRepository.findById(order.getId()).get());
+                    od.setProduct(productRepository.findById(simpleProduct.getProductId()).get());
+                    orderDetailRepository.save(od);
+                });
+                updateStocks(simpleOrderDTO);
+            } catch (NoSuchElementException e) {
+                System.out.println("Produs inexistent!");
+            } catch (Exception e) {
+                System.out.println("Nu exista pe stoc!");
+            }
         }
         return OrderDTO.orderToDTO(order);
     }
@@ -67,11 +66,11 @@ public class OrderService {
     public void updateStocks(SimpleOrderDTO simpleOrderDTO) {
         List<Item> items = new ArrayList<>();
         items = strategy.findLocations(simpleOrderDTO.getProducts());
-        for(Item item: items){
+        for (Item item : items) {
             StockKey stockKey = new StockKey();
             stockKey.setLocation(item.getLocation().getId());
             stockKey.setProduct(item.getProduct().getId());
-            Integer quantity =  stockRepository.getOne(stockKey).getQuantity();
+            Integer quantity = stockRepository.getOne(stockKey).getQuantity();
             stockRepository.deleteById(stockKey);
             Stock stock = new Stock();
             stock.setId(stockKey);
@@ -80,5 +79,18 @@ public class OrderService {
             stock.setProduct(item.getProduct());
             stockRepository.save(stock);
         }
+    }
+
+    public Boolean checkProducts(List<SimpleProduct> simpleProducts) {
+        Boolean b = true;
+        for (SimpleProduct simpleProduct : simpleProducts) {
+            try {
+                Product product = productRepository.findById(simpleProduct.getProductId()).get();
+            } catch (NoSuchElementException e) {
+                b = false;
+                System.out.println(e.getMessage());
+            }
+        }
+        return b;
     }
 }
