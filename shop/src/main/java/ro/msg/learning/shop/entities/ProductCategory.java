@@ -1,14 +1,17 @@
 package ro.msg.learning.shop.entities;
 
 
-import lombok.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-@Data
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
-@AllArgsConstructor
+@Data
 @Entity
 @Table
 public class ProductCategory extends BaseEntity {
@@ -17,4 +20,10 @@ public class ProductCategory extends BaseEntity {
 
     @Column(name = "description")
     private String description;
+
+    public ProductCategory(Integer id, String name, String description) {
+        super(id);
+        this.name = name;
+        this.description = description;
+    }
 }

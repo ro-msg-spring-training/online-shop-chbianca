@@ -1,15 +1,16 @@
 package ro.msg.learning.shop.entities;
 
-
-import lombok.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Set;
 
-@Getter @Setter
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
-@AllArgsConstructor
+@Data
 @Entity
 @Table
 public class Product extends BaseEntity {
@@ -26,7 +27,7 @@ public class Product extends BaseEntity {
     private Double weight;
 
     @ManyToOne
-    private ProductCategory category ;
+    private ProductCategory category;
 
     @ManyToOne
     private Supplier supplier;
@@ -39,4 +40,15 @@ public class Product extends BaseEntity {
 
     @OneToMany(mappedBy = "product")
     private Set<OrderDetail> orderDetails;
+
+    public Product(Integer id, String name, String description, BigDecimal price, Double weight, ProductCategory category, Supplier supplier, String imageUrl) {
+        super(id);
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.weight = weight;
+        this.category = category;
+        this.supplier = supplier;
+        this.imageUrl = imageUrl;
+    }
 }
