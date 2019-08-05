@@ -1,9 +1,13 @@
 package ro.msg.learning.shop.entities;
 
 
-import lombok.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import ro.msg.learning.shop.auxiliar_entities.OrderDetailKey;
+
 import javax.persistence.*;
 
+@EqualsAndHashCode(exclude = "product")
 @Data
 @Entity
 @Table

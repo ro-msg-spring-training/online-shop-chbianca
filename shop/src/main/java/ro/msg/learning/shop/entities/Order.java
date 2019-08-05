@@ -1,12 +1,18 @@
 package ro.msg.learning.shop.entities;
 
-import lombok.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import ro.msg.learning.shop.auxiliar_entities.Address;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+@EqualsAndHashCode(callSuper = true)
+@NoArgsConstructor
 @Data
 @Entity
-@Table(name ="orderr")
+@Table(name = "orderr")
 public class Order extends BaseEntity {
 
     @ManyToOne
@@ -18,7 +24,7 @@ public class Order extends BaseEntity {
     private Customer customer;
 
     @Column(name = "created_at ")
-    private LocalDateTime createdAt ;
+    private LocalDateTime createdAt;
 
     @Embedded
     private Address address;

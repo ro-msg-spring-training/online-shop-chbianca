@@ -3,6 +3,7 @@ package ro.msg.learning.shop.services;
 import org.springframework.stereotype.Service;
 import ro.msg.learning.shop.dto.ProductDTO;
 import ro.msg.learning.shop.entities.Product;
+import ro.msg.learning.shop.exception.ObjectNotFoundException;
 import ro.msg.learning.shop.repositories.ProductRepository;
 
 import java.util.ArrayList;
@@ -18,19 +19,16 @@ public class ProductService {
     }
 
     public ProductDTO findProductById(Integer productId) {
-        Product product = productRepository.findById(productId).get();
+        Product product = productRepository.findById(productId).orElseThrow(ObjectNotFoundException::new);
         return ProductDTO.productToDTO(product);
     }
 
     public List<ProductDTO> findAll() {
         List<Product> products = productRepository.findAll();
-        List<ProductDTO> toReturn = new ArrayList<ProductDTO>();
-        products.forEach(product -> {
-            toReturn.add(ProductDTO.productToDTO(product));
-        });
+        List<ProductDTO> toReturn = new ArrayList<>();
+        products.forEach(product -> toReturn.add(ProductDTO.productToDTO(product)));
         return toReturn;
     }
-
 
     public int create(ProductDTO productDTO) {
         Product product = new Product();
@@ -51,5 +49,4 @@ public class ProductService {
         productRepository.deleteById(id);
         return create(productDTO);
     }
-
 }

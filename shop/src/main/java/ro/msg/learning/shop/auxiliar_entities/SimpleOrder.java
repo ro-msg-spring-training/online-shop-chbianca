@@ -1,4 +1,5 @@
-package ro.msg.learning.shop.entities;
+package ro.msg.learning.shop.auxiliar_entities;
+
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -9,6 +10,4 @@ public class SimpleOrder {
     private LocalDateTime timestamp;
     private Address deliveryAddress;
     private List<SimpleProduct> products;
-
-
 }

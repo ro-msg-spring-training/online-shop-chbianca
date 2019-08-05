@@ -1,11 +1,17 @@
 package ro.msg.learning.shop.entities;
 
-
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import ro.msg.learning.shop.auxiliar_entities.StockKey;
 
 import javax.persistence.*;
 
-@Getter @Setter
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table
 public class Stock implements Comparable<Stock> {
@@ -27,8 +33,7 @@ public class Stock implements Comparable<Stock> {
 
     @Override
     public int compareTo(Stock stockToCompare) {
-        int compareQuantity=((Stock)stockToCompare).getQuantity();
-        return compareQuantity-this.quantity;
+        int compareQuantity = stockToCompare.getQuantity();
+        return compareQuantity - this.quantity;
     }
-
 }

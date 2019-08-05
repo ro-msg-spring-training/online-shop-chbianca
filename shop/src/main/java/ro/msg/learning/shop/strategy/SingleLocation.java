@@ -1,25 +1,28 @@
 package ro.msg.learning.shop.strategy;
 
 import org.springframework.stereotype.Component;
-import ro.msg.learning.shop.entities.*;
+import ro.msg.learning.shop.auxiliar_entities.Item;
+import ro.msg.learning.shop.auxiliar_entities.SimpleProduct;
+import ro.msg.learning.shop.entities.Location;
+import ro.msg.learning.shop.entities.Product;
+import ro.msg.learning.shop.entities.Stock;
+import ro.msg.learning.shop.exception.ObjectNotFoundException;
 import ro.msg.learning.shop.repositories.LocationRepository;
 import ro.msg.learning.shop.repositories.ProductRepository;
 import ro.msg.learning.shop.repositories.StockRepository;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Component
-public class SingleLocation implements Strategy{
+public class SingleLocation implements Strategy {
 
     private StockRepository stockRepository;
     private LocationRepository locationRepository;
     private ProductRepository productRepository;
 
 
-    public SingleLocation(StockRepository stockRepository, LocationRepository locationRepository, ProductRepository productRepository){
+    public SingleLocation(StockRepository stockRepository, LocationRepository locationRepository, ProductRepository productRepository) {
         this.stockRepository = stockRepository;
         this.locationRepository = locationRepository;
         this.productRepository = productRepository;
@@ -29,53 +32,33 @@ public class SingleLocation implements Strategy{
     public List<Item> findLocations(List<SimpleProduct> simpleProducts) {
         List<Location> locations = locationRepository.findAll();
         List<Item> items = new ArrayList<>();
-        Set<ProductLocation> productLocations = new HashSet();
+        HashMap<Product, List<Location>> productLocations = new HashMap<>();
         for (Location location : locations) {
-            boolean b = true;
             for (SimpleProduct simpleProduct : simpleProducts) {
-                ProductLocation productLocation = new ProductLocation();
-                productLocation.setProduct(productRepository.findById(simpleProduct.getProductId()).get());
-                productLocation.setLocations(verifyLocationsForProduct(simpleProduct));
-                productLocations.add(productLocation);
+                productLocations.put(productRepository.findById(simpleProduct.getProductId()).orElseThrow(ObjectNotFoundException::new), verifyLocationsForProduct(simpleProduct));
             }
 
-            for (ProductLocation productLocation : productLocations) {
-                if (!(productLocation.getLocations().contains(location))) {
-                    b = false;
-                }
+            for (Map.Entry<Product, List<Location>> productLocationEntry : productLocations.entrySet()) {
+                if (!(productLocationEntry.getValue().contains(location)))
+                    throw new NoSuchElementException();
             }
-
-            if (b)
-            {
-                for (SimpleProduct simpleProduct : simpleProducts) {
-                    Item item = new Item();
-                    item.setLocation(location);
-                    item.setProduct(productRepository.findById(simpleProduct.getProductId()).get());
-                    item.setQuantity(simpleProduct.getQuantity());
-                    items.add(item);
-                }
-               break;
+            for (SimpleProduct simpleProduct : simpleProducts) {
+                Item item = new Item();
+                item.setLocation(location);
+                item.setProduct(productRepository.findById(simpleProduct.getProductId()).orElseThrow(ObjectNotFoundException::new));
+                item.setQuantity(simpleProduct.getQuantity());
+                items.add(item);
             }
-            else
-            {System.out.println("Nu exista pe stoc toate produsele in aceeasi locatie!");}
-
-
+            break;
         }
-        //System.out.println("items: " + items.get(0).getLocation());
         return items;
     }
 
-
-    public List<Location> verifyLocationsForProduct(SimpleProduct simpleProduct) {
-        List<Stock> stocks = stockRepository.findAll();
-        List<Location> locations = new ArrayList<>();
-        for (Stock stock : stocks) {
-            if ((simpleProduct.getProductId().equals(stock.getProduct().getId())) && (simpleProduct.getQuantity() <= stock.getQuantity())) {
-                locations.add(stock.getLocation());
-            }
-        }
-        return locations;
+    private List<Location> verifyLocationsForProduct(SimpleProduct simpleProduct) {
+        List<Stock> stocks = stockRepository.findByProduct_Id(simpleProduct.getProductId()).orElseThrow(ObjectNotFoundException::new);
+        return stocks.stream()
+                .filter(stock -> stock.getQuantity() >= simpleProduct.getQuantity())
+                .map(Stock::getLocation)
+                .collect(Collectors.toList());
     }
-
-
 }

@@ -1,5 +1,6 @@
 package ro.msg.learning.shop.controllers;
 
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import ro.msg.learning.shop.dto.ProductDTO;
 import ro.msg.learning.shop.services.ProductService;
@@ -11,7 +12,7 @@ import java.util.List;
 public class ProductController {
     private ProductService productService;
 
-    public ProductController(ProductService productService){
+    public ProductController(ProductService productService) {
         this.productService = productService;
     }
 
@@ -35,9 +36,10 @@ public class ProductController {
         return productService.delete(id);
     }
 
+    @Transactional
     @RequestMapping(value = "/update/{id}", method = RequestMethod.PUT)
     public int updateProduct(@PathVariable("id") int id, @RequestBody ProductDTO productDTO) {
-        return productService.update(id,productDTO);
+        return productService.update(id, productDTO);
     }
 }
 

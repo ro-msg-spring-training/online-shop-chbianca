@@ -1,5 +1,6 @@
 package ro.msg.learning.shop.controllers;
 
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,12 +14,13 @@ import ro.msg.learning.shop.services.OrderService;
 public class OrderController {
     private OrderService orderService;
 
-    public OrderController(OrderService orderService){
+    public OrderController(OrderService orderService) {
         this.orderService = orderService;
     }
 
+    @Transactional
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public OrderDTO createOrder(@RequestBody SimpleOrderDTO simpleOrderDTO) {
-        return orderService.methodGetOrder(simpleOrderDTO);
+        return orderService.createOrder(simpleOrderDTO);
     }
 }

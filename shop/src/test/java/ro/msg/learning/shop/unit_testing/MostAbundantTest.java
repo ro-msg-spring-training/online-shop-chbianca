@@ -6,6 +6,10 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import ro.msg.learning.shop.auxiliar_entities.Address;
+import ro.msg.learning.shop.auxiliar_entities.Item;
+import ro.msg.learning.shop.auxiliar_entities.SimpleProduct;
+import ro.msg.learning.shop.auxiliar_entities.StockKey;
 import ro.msg.learning.shop.entities.*;
 import ro.msg.learning.shop.repositories.ProductRepository;
 import ro.msg.learning.shop.repositories.StockRepository;
@@ -32,122 +36,31 @@ public class MostAbundantTest {
 
     @Before
     public void initMostAbundant() {
-        mostAbundant = new MostAbundant(stockRepository, productRepository );
-        ProductCategory pc1 = new ProductCategory();
-        pc1.setId(1);
-        pc1.setName("telefon");
-        pc1.setDescription("-");
+        mostAbundant = new MostAbundant(stockRepository, productRepository);
+        ProductCategory pc1 = new ProductCategory(1, "telefon", "-");
+        ProductCategory pc2 = new ProductCategory(2, "electrocasnice", "--");
 
-        ProductCategory pc2 = new ProductCategory();
-        pc2.setId(2);
-        pc2.setName("electrocasnice");
-        pc2.setDescription("-");
+        Supplier s1 = new Supplier(1, "S1");
+        Supplier s2 = new Supplier(2, "S2");
 
-        Supplier s1 = new Supplier();
-        s1.setId(1);
-        s1.setName("S1");
-        Supplier s2 = new Supplier();
-        s2.setId(2);
-        s2.setName("S2");
+        Address a1 = new Address("Romania", "Cluj", "Cluj", "George Baritiu");
+        Address a2 = new Address("Romania", "Oradea", "Oradea", "Ana Ipatescu");
 
-        Address a1 = new Address();
-        a1.setCountry("Romania");
-        a1.setCity("Cluj");
-        a1.setCounty("Cluj");
-        a1.setStreetAddress("George Baritiu");
-        Address a2 = new Address();
-        a2.setCountry("Romania");
-        a2.setCity("Oradea");
-        a2.setCounty("Oradea");
-        a2.setStreetAddress("Ana Ipatescu");
+        Location l1 = new Location(1, "L1", a1);
+        Location l2 = new Location(2, "L2", a2);
 
-        Location l1 = new Location();
-        l1.setId(1);
-        l1.setName("L1");
-        l1.setAddress(a1);
-        Location l2 = new Location();
-        l2.setId(2);
-        l2.setName("L2");
-        l2.setAddress(a2);
+        Product p1 = new Product(1, "-", "Lenovo", new BigDecimal(2000), 2d, pc1, s1, "-");
+        Product p2 = new Product(2, "--", "Philips", new BigDecimal(1000), 1d, pc2, s2, "--");
 
-        Product p1 = new Product();
-        p1.setId(1);
-        p1.setName("Lenovo");
-        p1.setDescription("-");
-        p1.setPrice(new BigDecimal(2000));
-        p1.setWeight(new Double(2));
-        p1.setCategory(pc1);
-        p1.setSupplier(s1);
-        p1.setImageUrl("");
+        StockKey sk1 = new StockKey(1, 1);
+        StockKey sk2 = new StockKey(1, 2);
 
-
-        Product p2 = new Product();
-        p2.setId(2);
-        p2.setName("Philips");
-        p2.setDescription("-");
-        p2.setPrice(new BigDecimal(1000));
-        p2.setWeight(new Double(1));
-        p2.setCategory(pc2);
-        p2.setSupplier(s2);
-        p2.setImageUrl("");
-
-
-        StockKey sk1 = new StockKey();
-        sk1.setLocation(1);
-        sk1.setProduct(1);
-
-
-        StockKey sk2 = new StockKey();
-        sk2.setLocation(1);
-        sk2.setProduct(2);
-
-        StockKey sk3 = new StockKey();
-        sk1.setLocation(2);
-        sk1.setProduct(1);
-
-
-        StockKey sk4 = new StockKey();
-        sk2.setLocation(2);
-        sk2.setProduct(2);
-
-
-        Stock st1 = new Stock();
-        st1.setId(sk1);
-        st1.setQuantity(4);
-        st1.setProduct(p1);
-        st1.setLocation(l1);
-
-        Stock st2 = new Stock();
-        st2.setId(sk2);
-        st2.setQuantity(6);
-        st2.setProduct(p2);
-        st2.setLocation(l2);
-
-        List<Location> locations = new ArrayList<>();
-        locations.add(l1);
-        locations.add(l2);
+        Stock st1 = new Stock(sk1, p1, l1, 4);
+        Stock st2 = new Stock(sk2, p2, l2, 6);
 
         List<Stock> stocks = new ArrayList<>();
         stocks.add(st1);
         stocks.add(st2);
-
-        SimpleProduct sp1 = new SimpleProduct();
-        sp1.setProductId(1);
-        sp1.setQuantity(3);
-
-        SimpleProduct sp2 = new SimpleProduct();
-        sp2.setProductId(2);
-        sp2.setQuantity(3);
-
-        Item i1 = new Item();
-        i1.setProduct(p1);
-        i1.setLocation(l2);
-        i1.setQuantity(3);
-
-        Item i2 = new Item();
-        i2.setProduct(p2);
-        i2.setLocation(l2);
-        i2.setQuantity(3);
 
         when(productRepository.findById(1)).thenReturn(Optional.of(p1));
         when(productRepository.findById(2)).thenReturn(Optional.of(p2));
@@ -157,13 +70,8 @@ public class MostAbundantTest {
     @Test
     public void findLocations() {
         List<SimpleProduct> simpleProducts = new ArrayList<>();
-        SimpleProduct sp1 = new SimpleProduct();
-        sp1.setProductId(1);
-        sp1.setQuantity(3);
-
-        SimpleProduct sp2 = new SimpleProduct();
-        sp2.setProductId(2);
-        sp2.setQuantity(3);
+        SimpleProduct sp1 = new SimpleProduct(1, 2);
+        SimpleProduct sp2 = new SimpleProduct(2, 2);
         simpleProducts.add(sp1);
         simpleProducts.add(sp2);
 

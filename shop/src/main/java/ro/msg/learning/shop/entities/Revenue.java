@@ -1,10 +1,13 @@
 package ro.msg.learning.shop.entities;
 
-import lombok.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
 @Table
@@ -18,4 +21,11 @@ public class Revenue extends BaseEntity {
 
     @Column(name = "sum")
     private BigDecimal sum;
+
+    public Revenue(Integer id, Location location, LocalDate date, BigDecimal sum) {
+        super(id);
+        this.location = location;
+        this.date = date;
+        this.sum = sum;
+    }
 }

@@ -13,16 +13,20 @@ import java.util.Map;
 @Configuration
 public class SecurityConfig {
 
-    @Autowired
     private UserDetailsService userDetailsService;
 
+    public SecurityConfig(UserDetailsService userDetailsService) {
+        this.userDetailsService = userDetailsService;
+
+    }
+
     @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+    public void configureGlobal(AuthenticationManagerBuilder auth) {
         Map<String, String> map = userDetailsService.getUsernamesAndPasswords();
-        map.entrySet().forEach(e -> {
+        map.forEach((key, value) -> {
             try {
                 auth.inMemoryAuthentication()
-                        .withUser(e.getKey()).password("{noop}" + e.getValue()).roles("USER").and();
+                        .withUser(key).password("{noop}" + value).roles("USER").and();
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
@@ -43,7 +47,7 @@ public class SecurityConfig {
                     .anyRequest().authenticated()
                     .and()
                     .formLogin()
-                    ;
+            ;
             http.headers().frameOptions().disable();
         }
     }
@@ -60,7 +64,7 @@ public class SecurityConfig {
                     .anyRequest().authenticated()
                     .and()
                     .httpBasic()
-                    ;
+            ;
             http.headers().frameOptions().disable();
         }
     }

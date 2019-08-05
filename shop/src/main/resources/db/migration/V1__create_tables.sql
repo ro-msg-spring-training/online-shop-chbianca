@@ -77,7 +77,6 @@ create table product (
 
 create table product_category (
                                   id integer not null AUTO_INCREMENT,
-
                                   name varchar(255),
                                   description varchar(255),
                                   primary key (id)
